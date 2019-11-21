@@ -179,6 +179,7 @@ $(document).ready(function(){
 				$('#detail').val(data.detail);
 				$('#date').val(data.date);
 				$('#color').val(data.color);
+				$('#status').val(data.status);
 				$('#user_dialog').attr('title', 'Edit Data');
 				$('#action').val('update');
 				$('#hidden_id').val(id);
@@ -256,7 +257,7 @@ $(document).ready(function(){
 				echo '<input type="hidden" id="month_val" value="' . $month . '">';
 				echo '<input type="hidden" id="year_val" value="' . $year . '">';
 				echo '<div style="color: #001270;  font-size: 19px;  padding: 14px;">Welcome ' .htmlentities($_SESSION['username']). ' ! | <b>'.$month_display.', '.$year.'</b> <a class="btn btn-success btn-sm" href="calendar.php?date='.$todayyear.'-'.$todaymonth.'-'.$today.'" id="todayjump">Today</a> <a class="btn btn-danger btn-sm" href="#" id="delete">Logout</a></div>';
-					$sql = "SELECT * FROM `appo` WHERE (`date` BETWEEN '" . $firstday_date . "' AND '" . $last_day_date . "') AND user = '". $_SESSION['user_id'] ."'";
+					$sql = "SELECT * FROM `appo` WHERE (`date` BETWEEN '" . $firstday_date . "' AND '" . $last_day_date . "') AND user = '". $_SESSION['user_id'] ."' OR status='Public'";
 					$result = $conn->query($sql);
 
 					$events = array();
@@ -312,7 +313,7 @@ $(document).ready(function(){
 							//echo '<span id=" "'.$one_event['title'].<br>"';
 							echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
 <div class="appo_info" for_event="'.$one_event['id'].'" title="'.$one_event['title'].'" style="z-index: 10;"><b>Detail : </b>
-  '.$one_event['detail'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
+  '.$one_event['detail'].'<br><b>User : </b>'.$one_event['username'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
 </div>
 						 	</span><br>';
 					 }
@@ -335,6 +336,14 @@ $(document).ready(function(){
 </div>
 			<div id="user_dialog" title="Add Event">
 			<form method="post" id="user_form">
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="radio" name="status" id="Private" value="Private" checked>
+				  <label class="form-check-label" >Private Event</label>
+				</div>
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="radio" name="status" id="Public" value="Public">
+				  <label class="form-check-label">Public Event</label>
+				</div>
 				<div class="form-group">
 					<label>Title</label>
 					<input type="text" name="title" id="title" class="form-control" />

@@ -32,6 +32,7 @@ if(isset($_POST["action"]))
 		/*$query = "
 		INSERT INTO `appo` (first_name, last_name) VALUES ('".$_POST["first_name"]."', '".$_POST["last_name"]."')
 		";*/
+	$status  = $_POST['status'];
 	$title  = $_POST['title'];
     $detail = $_POST['detail'];
     $date   = $_POST['date'];
@@ -39,7 +40,7 @@ if(isset($_POST["action"]))
     $time_end = $_POST['timeend'];
     $color  = $_POST['color'];
     //echo '<a class="gotomonth" href="calendar.php?date=' . $_POST['date'] . '"> Calendar </a>';
-    $query = "INSERT INTO `appo` (`id`, `user`, `title`, `detail`, `date`, `time`, `timeend`, `color`) VALUES (NULL, '" . $_SESSION['user_id'] . "', '" . $title . "', '" . $detail . "', '" . $date . "', '" . $time . "', '" . $time_end . "', '" . $color . "')";
+    $query = "INSERT INTO `appo` (`id`, `user`, `title`, `detail`, `date`, `time`, `timeend`, `color`, `status`, `username`) VALUES (NULL, '" . $_SESSION['user_id'] . "', '" . $title . "', '" . $detail . "', '" . $date . "', '" . $time . "', '" . $time_end . "', '" . $color . "', '" . $status . "', '" . $_SESSION['username'] . "')";
 		$statement = $connect->prepare($query);
 		$statement->execute();
 		echo '<p>Data Inserted...</p>';
@@ -61,12 +62,13 @@ if(isset($_POST["action"]))
 			$output['time'] = $row['time'];
 			$output['timeend'] = $row['timeend'];
 			$output['color'] = $row['color'];
+			$output['status'] = $row['status'];
 		}
 		echo json_encode($output);
 	}
 	if($_POST["action"] == "update")
 	{
-		$query = "UPDATE `appo` SET title='".$_POST["title"]."', detail='".$_POST["detail"]."', `date`='".$_POST["date"]."', `time`='".$_POST["time"]."', timeend='".$_POST["timeend"]."', color='".$_POST["color"]."' WHERE id = '". $_POST['hidden_id'] ."' ";
+		$query = "UPDATE `appo` SET title='".$_POST["title"]."', detail='".$_POST["detail"]."', `date`='".$_POST["date"]."', `time`='".$_POST["time"]."', timeend='".$_POST["timeend"]."', color='".$_POST["color"]."', status='".$_POST["status"]."' WHERE id = '". $_POST['hidden_id'] ."' ";
 		$statement = $connect->prepare($query);
 		$statement->execute();
 		echo '<p>Data Updated</p>';

@@ -203,6 +203,7 @@ if($week > 52) {
                 $('#detail').val(data.detail);
                 $('#date').val(data.date);
                 $('#color').val(data.color);
+                $('#status').val(data.status);
                 $('#user_dialog').attr('title', 'Edit Data');
                 $('#action').val('update');
                 $('#hidden_id').val(id);
@@ -211,9 +212,6 @@ if($week > 52) {
             }
         });
     });
-
-
-
 
     $("#picker1").colorPick({
         'initialColor': '#03A9F4',
@@ -276,7 +274,7 @@ for($day= 1; $day <= 7; $day++) {
             <div class="daylable" style="padding-left: 2px; color: #F57F17;font-size: 17px; height: 50px; width: 150px; background-color: #FFF176; border: 2px solid #FFD600" >'.date('l', $d).'<br>'.date('d M', $d).'</div>
             </div>';
             $startdate = date('Y-m-d', $d);
-            $get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."'";
+$get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."' OR (`status`='Public' AND `date` = '$startdate')";
             $run_appo = mysqli_query($conn, $get_appo);
             for($i=0; $i<24; $i++)
                 {
@@ -302,9 +300,9 @@ for($day= 1; $day <= 7; $day++) {
                             }
                             else
                                 $fontcolor = 'white';
-                            echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
+                             echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
 <div class="appo_info" for_event="'.$one_event['id'].'" title="'.$one_event['title'].'" style="z-index: 10;"><b>Detail : </b>
-  '.$one_event['detail'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
+  '.$one_event['detail'].'<br><b>User : </b>'.$one_event['username'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
 </div>
                             </span><br>';
 
@@ -327,7 +325,7 @@ for($day= 1; $day <= 7; $day++) {
             <div class="daylable" style="padding-left: 2px; color: #880E4F;font-size: 17px; height: 50px; width: 150px; background-color: #F48FB1; border: 2px solid #F50057" >'.date('l', $d).'<br>'.date('d M', $d).'</div>
             </div>';
             $startdate = date('Y-m-d', $d);
-            $get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."'";
+$get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."' OR (`status`='Public' AND `date` = '$startdate')";
             $run_appo = mysqli_query($conn, $get_appo);
             for($i=0; $i<24; $i++)
                 {
@@ -353,9 +351,9 @@ for($day= 1; $day <= 7; $day++) {
                             }
                             else
                                 $fontcolor = 'white';
-                            echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
+                             echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
 <div class="appo_info" for_event="'.$one_event['id'].'" title="'.$one_event['title'].'" style="z-index: 10;"><b>Detail : </b>
-  '.$one_event['detail'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
+  '.$one_event['detail'].'<br><b>User : </b>'.$one_event['username'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
 </div>
                             </span><br>';
                         }
@@ -378,7 +376,7 @@ for($day= 1; $day <= 7; $day++) {
             <div class="daylable" style="padding-left: 2px; color: #1B5E20;font-size: 17px; height: 50px; width: 150px; background-color: #A5D6A7; border: 2px solid #00C853" >'.date('l', $d).'<br>'.date('d M', $d).'</div>
             </div>';
             $startdate = date('Y-m-d', $d);
-            $get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."'";
+$get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."' OR (`status`='Public' AND `date` = '$startdate')";
             $run_appo = mysqli_query($conn, $get_appo);
             for($i=0; $i<24; $i++)
                 {
@@ -404,9 +402,9 @@ for($day= 1; $day <= 7; $day++) {
                             }
                             else
                                 $fontcolor = 'white';
-                            echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
+                             echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
 <div class="appo_info" for_event="'.$one_event['id'].'" title="'.$one_event['title'].'" style="z-index: 10;"><b>Detail : </b>
-  '.$one_event['detail'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
+  '.$one_event['detail'].'<br><b>User : </b>'.$one_event['username'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
 </div>
                             </span><br>';
                         }
@@ -428,7 +426,7 @@ for($day= 1; $day <= 7; $day++) {
             <div class="daylable" style="padding-left: 2px; color: #E65100;font-size: 17px; height: 50px; width: 150px; background-color: #FFB74D; border: 2px solid #FF6D00" >'.date('l', $d).'<br>'.date('d M', $d).'</div>
             </div>';
             $startdate = date('Y-m-d', $d);
-            $get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."'";
+$get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."' OR (`status`='Public' AND `date` = '$startdate')";
             $run_appo = mysqli_query($conn, $get_appo);
             for($i=0; $i<24; $i++)
                 {
@@ -454,9 +452,9 @@ for($day= 1; $day <= 7; $day++) {
                             }
                             else
                                 $fontcolor = 'white';
-                            echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
+                             echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
 <div class="appo_info" for_event="'.$one_event['id'].'" title="'.$one_event['title'].'" style="z-index: 10;"><b>Detail : </b>
-  '.$one_event['detail'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
+  '.$one_event['detail'].'<br><b>User : </b>'.$one_event['username'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
 </div>
                             </span><br>';
                         }
@@ -478,7 +476,7 @@ for($day= 1; $day <= 7; $day++) {
             <div class="daylable" style="padding-left: 2px; color: #1A237E;font-size: 17px; height: 50px; width: 150px; background-color: #90CAF9; border: 2px solid #304FFE" >'.date('l', $d).'<br>'.date('d M', $d).'</div>
             </div>';
             $startdate = date('Y-m-d', $d);
-            $get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."'";
+$get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."' OR (`status`='Public' AND `date` = '$startdate')";
             $run_appo = mysqli_query($conn, $get_appo);
             for($i=0; $i<24; $i++)
                 {
@@ -504,9 +502,9 @@ for($day= 1; $day <= 7; $day++) {
                             }
                             else
                                 $fontcolor = 'white';
-                            echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
+                             echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
 <div class="appo_info" for_event="'.$one_event['id'].'" title="'.$one_event['title'].'" style="z-index: 10;"><b>Detail : </b>
-  '.$one_event['detail'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
+  '.$one_event['detail'].'<br><b>User : </b>'.$one_event['username'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
 </div>
                             </span><br>';
                         }
@@ -528,7 +526,7 @@ for($day= 1; $day <= 7; $day++) {
             <div class="daylable" style="padding-left: 2px; color: #4A148C;font-size: 17px; height: 50px; width: 150px; background-color: #EA80FC; border: 2px solid #AA00FF" >'.date('l', $d).'<br>'.date('d M', $d).'</div>
             </div>';
             $startdate = date('Y-m-d', $d);
-            $get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."'";
+$get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."' OR (`status`='Public' AND `date` = '$startdate')";
             $run_appo = mysqli_query($conn, $get_appo);
             for($i=0; $i<24; $i++)
                 {
@@ -554,9 +552,9 @@ for($day= 1; $day <= 7; $day++) {
                             }
                             else
                                 $fontcolor = 'white';
-                            echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
+                             echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
 <div class="appo_info" for_event="'.$one_event['id'].'" title="'.$one_event['title'].'" style="z-index: 10;"><b>Detail : </b>
-  '.$one_event['detail'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
+  '.$one_event['detail'].'<br><b>User : </b>'.$one_event['username'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
 </div>
                             </span><br>';
                         }
@@ -578,7 +576,7 @@ for($day= 1; $day <= 7; $day++) {
             <div class="daylable" style="padding-left: 2px; color: #b71c1c;font-size: 17px; height: 50px; width: 150px; background-color: #ff8a80; border: 2px solid #f44336" >'.date('l', $d).'<br>'.date('d M', $d).'</div>
             </div>';
             $startdate = date('Y-m-d', $d);
-            $get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."'";
+$get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."' OR (`status`='Public' AND `date` = '$startdate')";
             $run_appo = mysqli_query($conn, $get_appo);
             for($i=0; $i<24; $i++)
                 {
@@ -606,7 +604,7 @@ for($day= 1; $day <= 7; $day++) {
                                 $fontcolor = 'white';
                             echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
 <div class="appo_info" for_event="'.$one_event['id'].'" title="'.$one_event['title'].'" style="z-index: 10;"><b>Detail : </b>
-  '.$one_event['detail'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
+  '.$one_event['detail'].'<br><b>User : </b>'.$one_event['username'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
 </div>
                             </span><br>';
                         }
@@ -627,6 +625,14 @@ for($day= 1; $day <= 7; $day++) {
 </div>
 <div id="user_dialog" title="Add Event">
             <form method="post" id="user_form">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="status" id="Private" value="Private" checked>
+                  <label class="form-check-label" >Private Event</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="status" id="Public" value="Public">
+                  <label class="form-check-label">Public Event</label>
+                </div>
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" name="title" id="title" class="form-control" />

@@ -93,8 +93,16 @@ background-color: #fff;
 			<a style="color: blue;" href="calendar.php?date=<?php echo $_GET['date'];?>"> << Calendar</a>
 		</div>
 		
-		<div id="user_dialog" title="Add Data">
+		<div id="user_dialog" title="Add Event">
 			<form method="post" id="user_form">
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="radio" name="status" id="Private" value="Private" checked>
+				  <label class="form-check-label" >Private Event</label>
+				</div>
+				<div class="form-check form-check-inline">
+				  <input class="form-check-input" type="radio" name="status" id="Public" value="Public">
+				  <label class="form-check-label">Public Event</label>
+				</div>
 				<div class="form-group">
 					<label>Title</label>
 					<input type="text" name="title" id="title" class="form-control" />
@@ -257,6 +265,7 @@ $(document).ready(function(){
 	
 	$(document).on('click', '.edit', function(){
 		var id = $(this).attr('id');
+		console.log(id);
 		var action = 'fetch_single';
 		$.ajax({
 			url:"action.php",
@@ -266,10 +275,10 @@ $(document).ready(function(){
 			success:function(data)
 			{
 				$('#title').val(data.title);
-				$('#title').val(data.title);
 				$('#detail').val(data.detail);
 				$('#date').val(data.date);
 				$('#color').val(data.color);
+				$('#status').val(data.status);
 				$('#user_dialog').attr('title', 'Edit Data');
 				$('#action').val('update');
 				$('#hidden_id').val(id);

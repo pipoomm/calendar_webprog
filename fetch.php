@@ -40,6 +40,7 @@ $output = '
 		<th>Start</th>
 		<th>End</th>
 		<th>Color</th>
+		<th>Status</th>
 		<th>Edit</th>
 		<th>Delete</th>
 	</tr>
@@ -57,8 +58,9 @@ if($total_row > 0)
 			<td width="10%">'.$row["time"].'</td>
 			<td width="10%">'.$row["timeend"].'</td>
 			<td width="10%">'.$row["color"].'</td>
+			<td width="10%">'.$row["status"].'</td>
 			<td width="10%">
-				<button type="button" name="edit" class="btn btn-primary btn-xs edit" id="'.$row["id"].'">Edit</button>
+				<button type="button" name="edit" class="btn btn-warning btn-xs edit" id="'.$row["id"].'">Edit</button>
 			</td>
 			<td width="10%">
 				<button type="button" name="delete" class="btn btn-danger btn-xs delete" id="'.$row["id"].'">Delete</button>
