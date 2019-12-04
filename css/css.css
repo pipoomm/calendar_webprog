@@ -109,16 +109,16 @@ width: 120px;
 float: left;
 margin: 5px;
 text-align: right;
- transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+/* transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
 }
 div.date:hover
 {
-  background-color: #c9d6ff;
+/*  background-color: #c9d6ff;
 -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
   -ms-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
   -o-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);*/
 }
 div.days1, div.days2, div.days3, div.days4, div.days5, div.days6, div.days7
 {

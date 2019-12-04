@@ -19,6 +19,10 @@ include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 include_once 'includes/connection.php';
 sec_session_start();
+if(!isset($_GET['date']))
+{
+  $_GET['date'] = date("Y-m-d");
+}
 $dateparemeter = date('Y-m-d', strtotime($_GET['date']));
 $week = date('W', strtotime($_GET['date']));
 $year = date('Y', strtotime($_GET['date']));
@@ -81,13 +85,72 @@ $(document).ready(function() {
         $(".appo_info[for_event='" + my_id + "']").dialog('open');
     });
 
-    $(".appo_info").dialog({
-        modal: true,
-        autoOpen: false,
-        position: {
-            at: "center top"
-        }
-    });
+    $( ".appo_info" ).dialog({
+          buttons: {
+          'Edit': function(e) {
+            var id = $(this).attr('id');
+            var action = 'fetch_single';
+          $.ajax({
+            url:"action.php",
+            method:"POST",
+            data:{id:id, action:action},
+            dataType:"json",
+            success:function(data)
+            {
+              $('#title').val(data.title);
+              $('#title').val(data.title);
+              $('#detail').val(data.detail);
+              $('#date').val(data.date);
+              $('#color').val(data.color);
+              $('#status').val(data.status);
+              $('#user_dialog').attr('title', 'Edit Data');
+              $('#action').val('update');
+              $('#hidden_id').val(id);
+              $('#form_action').val('Update');
+              $('#user_dialog').dialog('open');
+            }
+          });
+            },
+            'Delete': function(e) {
+            var id = $(this).attr("id");
+          $('#delete_confirmation').data('id', id).dialog('open');
+            }
+        },
+          modal: true,
+          autoOpen: false,
+          position: { at: "center top" }
+        });
+
+
+    $('#delete_confirmation').dialog({
+    autoOpen:false,
+    modal: true,
+    buttons:{
+      Ok : function(){
+        var id = $(this).data('id');
+        var action = 'delete';
+        $.ajax({
+          url:"action.php",
+          method:"POST",
+          data:{id:id, action:action},
+          success:function(data)
+          {
+            $('#delete_confirmation').dialog('close');
+            //$('#action_alert').html(data);
+            //$('#action_alert').dialog('open');
+            //load_data();
+            $('.appo_info').dialog('close');
+            location.reload();
+          }
+        });
+      },
+      Cancel : function(){
+        $(this).dialog('close');
+      }
+    } 
+  });
+
+
     $(".draggable").draggable();
     $(".droppable").droppable({
         drop: function(event, ui) {
@@ -276,7 +339,7 @@ $(document).ready(function() {
                             else
                                 $fontcolor = 'white';
 						 	echo '<span id='.$one_event['id'].' class="draggable appo" style="color:'.$fontcolor.';font-size: 17px;background-color: '.$one_event['color'].';">'.$one_event['title'].'
-<div class="appo_info" for_event="'.$one_event['id'].'" title="'.$one_event['title'].'" style="z-index: 10;"><b>Detail : </b>
+<div class="appo_info" id='.$one_event['id'].' for_event="'.$one_event['id'].'" title="'.$one_event['title'].'" style="z-index: 10;"><b>Detail : </b>
   '.$one_event['detail'].'<br><b>User : </b>'.$one_event['username'].'<br><b>Start : </b>'.$one_event['time'].'<br><b>End : </b>'.$one_event['timeend'].'
 </div>
 						 	</span><br>';
@@ -393,8 +456,10 @@ $(document).ready(function() {
 		</div>
 		
 		<div id="action_alert" title="Action">
-			
 		</div>
+    <div id="delete_confirmation" title="Confirmation">
+    <p>Are you sure you want to Delete this data?</p>
+    </div>
     <?php else : 
     echo "<script>window.location = 'loginrequest.php';</script>";
     ?>

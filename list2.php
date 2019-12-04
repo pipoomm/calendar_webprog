@@ -265,7 +265,6 @@ $(document).ready(function(){
 	
 	$(document).on('click', '.edit', function(){
 		var id = $(this).attr('id');
-		console.log(id);
 		var action = 'fetch_single';
 		$.ajax({
 			url:"action.php",
