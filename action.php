@@ -81,6 +81,15 @@ if(isset($_POST["action"]))
 		$statement->execute();
 		echo '<p>Data Deleted</p>';
 	}
+
+	if($_POST["action"] == "clear")
+	{
+		$query = "DELETE FROM `appo` WHERE `user` = '".$_POST["user"]."'";
+		$statement = $connect->prepare($query);
+		$statement->execute();
+		echo '<p>Data Deleted</p>';
+	}
+
 }
 
 ?>

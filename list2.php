@@ -85,9 +85,10 @@ background-color: #fff;
 			<br />
 			<div align="right" style="margin-bottom:5px;">
 			<button type="button" name="add" id="add" class="btn btn-success btn-xs">Add</button>
+			<button type="button" name="clear" id="clear" class="btn btn-default btn-xs">Clear</button>
 			</div>
 			<div class="table-responsive" id="user_data" style="">
-				
+
 			</div>
 			<br />
 			<a style="color: blue;" href="calendar.php?date=<?php echo $_GET['date'];?>"> << Calendar</a>
@@ -192,11 +193,16 @@ background-color: #fff;
 		</div>
 		
 		<div id="action_alert" title="Action">
-			
+			<p>Delete event successful</p>
 		</div>
 		
 		<div id="delete_confirmation" title="Confirmation">
-		<p>Are you sure you want to Delete this data?</p>
+		<p>Are you sure you want to Delete this event?</p>
+		</div>
+
+		<div id="clear_confirmation" title="Confirmation">
+			<input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+		<p>Are you sure you want to Clear all event?</p>
 		</div>
 		
     </body>  
@@ -226,6 +232,37 @@ $(document).ready(function(){
 		autoOpen:false,
 		width:400
 	});
+
+	$('#clear').click(function(){
+		$("#clear_confirmation").dialog('open');
+	});
+
+		$('#clear_confirmation').dialog({
+		autoOpen:false,
+		modal: true,
+		buttons:{
+			Ok : function(){
+				var id = $("#user_id").val();
+				var action = 'clear';
+				$.ajax({
+					url:"action.php",
+					method:"POST",
+					data:{user:id, action:action},
+					success:function(data)
+					{
+						$("#clear_confirmation").dialog('close');
+						$('#action_alert').html(data);
+						$('#action_alert').dialog('open');
+						load_data();
+					}
+				});
+			},
+			Cancel : function(){
+				$(this).dialog('close');
+			}
+		}	
+	});
+
 	
 	$('#add').click(function(){
 		$('#user_dialog').attr('title', 'Add Data');
@@ -317,5 +354,6 @@ $(document).ready(function(){
 		var id = $(this).attr("id");
 		$('#delete_confirmation').data('id', id).dialog('open');
 	});
+
 });  
 </script>

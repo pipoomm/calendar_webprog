@@ -109,16 +109,16 @@ width: 120px;
 float: left;
 margin: 5px;
 text-align: right;
-/* transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+ transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 div.date:hover
 {
-/*  background-color: #c9d6ff;
+background-color: #c9d6ff;
 -webkit-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
   -ms-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
   -o-box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);*/
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 div.days1, div.days2, div.days3, div.days4, div.days5, div.days6, div.days7
 {
@@ -327,10 +327,23 @@ font-size: 16px;
 }
 .btnadd{
   background-image: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-  bottom:5;position:fixed;overflow-x:hidden;
+  bottom:5;
+  position:fixed;overflow-x:hidden;
   border-radius: 25px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  cursor: pointer;
+color: white;
+right: 3%;
+background-size: 200%;
+transition: 1s;
+border:0;
+margin: 10px auto;
+text-align: center;
+padding: 14px 30px;
+z-index: 9;
+display: inline-block;
+font-size: 16px;
 }
 .btnregis
 {

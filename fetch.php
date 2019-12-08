@@ -57,7 +57,7 @@ if($total_row > 0)
 			<td width="10%">'.$row["date"].'</td>
 			<td width="10%">'.$row["time"].'</td>
 			<td width="10%">'.$row["timeend"].'</td>
-			<td width="10%">'.$row["color"].'</td>
+			<td width="10%" style="color: '.$row["color"].' " >'.$row["color"].'</td>
 			<td width="10%">'.$row["status"].'</td>
 			<td width="10%">
 				<button type="button" name="edit" class="btn btn-warning btn-xs edit" id="'.$row["id"].'">Edit</button>

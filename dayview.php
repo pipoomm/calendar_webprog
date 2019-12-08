@@ -170,7 +170,9 @@ $(document).ready(function() {
                 },
                 success: function(data) {
                     if (data) {
-                        location.reload();
+                    	document.getElementById(ui.draggable.attr('id')).style.position = "relative";
+                    	document.getElementById(ui.draggable.attr('id')).style.left = "0px";
+                        //location.reload();
                     } else {
                         alert('Fail to connect database');
                     }
@@ -285,7 +287,7 @@ $(document).ready(function() {
 					<label for="date">Date</label>
 					<input type="date" name="date" value="<?php echo $_GET['date'];?>">
 					<button class="btncal btnsubmit">Goto</button>
-					<button type="button" name="add" id="add" class="btncal btnadd">+ Event</button>
+					<button type="button" name="add" id="add" class="btnadd">+ Event</button>
 					<?php
 					echo '<a class="nrm_btn" href="?date=' . date("Y-m-d", strtotime("+1 day", strtotime($_GET['date']))) . '"> >> </a>';
 					

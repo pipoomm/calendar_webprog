@@ -75,6 +75,7 @@ $(document).ready(function() {
 
 		    $( ".appo_info" ).dialog({
 		    	buttons: {
+
     			'Edit': function(e) {
     				var id = $(this).attr('id');
     				var action = 'fetch_single';
@@ -85,7 +86,6 @@ $(document).ready(function() {
 						dataType:"json",
 						success:function(data)
 						{
-							$('#title').val(data.title);
 							$('#title').val(data.title);
 							$('#detail').val(data.detail);
 							$('#date').val(data.date);
@@ -273,7 +273,7 @@ $(document).ready(function(){
 					<label for="date">Date</label>
 					<input type="date" name="date" value="<?php echo $_GET['date'];?>">
 					<button class="btncal btnsubmit">Goto</button>
-					<button type="button" name="add" id="add" class="btncal btnadd">+ Event</button>
+					<button type="button" name="add" id="add" class="btnadd">+ Event</button>
 				</div>
 			</form>
 			
@@ -319,7 +319,7 @@ $(document).ready(function(){
 				echo '<input type="hidden" id="month_val" value="' . $month . '">';
 				echo '<input type="hidden" id="year_val" value="' . $year . '">';
 				echo '<div style="color: #001270;  font-size: 19px;  padding: 14px;">Welcome ' .htmlentities($_SESSION['username']). ' ! | <b>'.$month_display.', '.$year.'</b> <a class="btn btn-success btn-sm" href="calendar.php?date='.$todayyear.'-'.$todaymonth.'-'.$today.'" id="todayjump">Today</a> <a class="btn btn-danger btn-sm" href="#" id="delete">Logout</a></div>';
-					$sql = "SELECT * FROM `appo` WHERE (`date` BETWEEN '" . $firstday_date . "' AND '" . $last_day_date . "') AND user = '". $_SESSION['user_id'] ."' OR status='Public'";
+					$sql = "SELECT * FROM `appo` WHERE (`date` BETWEEN '" . $firstday_date . "' AND '" . $last_day_date . "') AND user = '". $_SESSION['user_id'] ."' OR (status='Public' AND (`date` BETWEEN '" . $firstday_date . "' AND '" . $last_day_date . "'))";
 					$result = $conn->query($sql);
 
 					$events = array();
@@ -396,10 +396,8 @@ $(document).ready(function(){
 			</div>
 
 </div>
-			<div id="edit_event" title="Edit">
-				Hello
-			</div>
-			<div id="user_dialog" title="Add Event">
+			
+			<div id="user_dialog" title="Appointment">
 			<form method="post" id="user_form">
 				<div class="form-check form-check-inline">
 				  <input class="form-check-input" type="radio" name="status" id="Private" value="Private" checked>
@@ -499,8 +497,6 @@ $(document).ready(function(){
 		<div id="delete_confirmation" title="Confirmation">
 		<p>Are you sure you want to Delete this data?</p>
 		</div>
-		</body>
-	</html>
 	<?php else : 
 		echo "<script>window.location = 'loginrequest.php';</script>";
     ?>

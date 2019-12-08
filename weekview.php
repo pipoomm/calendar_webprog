@@ -284,6 +284,7 @@ if($week > 52) {
 });
     </script>
     <body>
+        <?php if (login_check($mysqli) == true) : ?>
         <div class="container">
         <form class="indexbox" action="weekview.php" method="get">
             <div class="row">
@@ -291,7 +292,7 @@ if($week > 52) {
                     <label for="date">Date</label>
                     <input type="date" name="date" value="<?php echo $_GET['date'];?>">
                     <button class="btncal btnsubmit">Goto</button>
-                    <button type="button" name="add" id="add" class="btncal btnadd">+ New</button>
+                    <button type="button" name="add" id="add" class="btnadd">+ Event</button>
                     
                     <a class="nrm_btn" href="<?php echo $_SERVER['PHP_SELF'].'?week='.($week == 52 ? 1 : 1 + $week).'&year='.($week == 52 ? 1 + $year : $year).'&date='.$dateparemeterplus; ?>"> >> </a> <!--Next week-->
                     <a class="nrm_btn" href="<?php echo $_SERVER['PHP_SELF'].'?week='.($week == 1 ? 52 : $week -1).'&year='.($week == 1 ? $year - 1 : $year).'&date='.$dateparemeterminus; ?>"> << </a> <!--Previous week-->
@@ -327,7 +328,7 @@ for($day= 1; $day <= 7; $day++) {
         if(date('l', $d) == 'Monday')
         {
             echo '<div style="height: 60px;">
-            <div class="daylable" style="padding-left: 2px; color: #F57F17;font-size: 17px; height: 50px; width: 150px; background-color: #FFF176; border: 2px solid #FFD600" >'.date('l', $d).'<br>'.date('d M', $d).'</div>
+            <div class="daylable" style="padding-left: 2px; color: #F57F17;font-size: 17px; height: 50px; width: 150px; background-color: #FFF176; border: 2px solid #FFD600" ><b>'.date('l', $d).'</b><br>'.date('d M', $d).'</div>
             </div>';
             $startdate = date('Y-m-d', $d);
 $get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $_SESSION['user_id'] ."' OR (`status`='Public' AND `date` = '$startdate')";
@@ -782,6 +783,9 @@ $get_appo = "SELECT * FROM `appo` WHERE (`date` = '$startdate') AND user = '". $
     <p>Are you sure you want to Delete this data?</p>
     </div>
     
-
+<?php else : 
+        echo "<script>window.location = 'loginrequest.php';</script>";
+    ?>
+    <?php endif; ?>
     </body>
 </html>
